@@ -1,5 +1,5 @@
  import 'package:flutter/material.dart';
-                 
+ import 'package:task2/styles/styles.dart';                
 
 class CommonContainer extends StatelessWidget {
 CommonContainer({required this.text,required this.text1,required this.text2,required this.text3,
@@ -18,7 +18,7 @@ Widget build(BuildContext context) {
                           height: 200,
                           width: 300,
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color:AppColor.primaryColor,
                               borderRadius: BorderRadius.circular(20)),
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -48,7 +48,9 @@ Widget build(BuildContext context) {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(text),
-                                            Text(text1),
+                                            Text(text1, style: TextStyle(
+                                                color: TextColor.primaryColor,
+                                              ),),
                                           ],
                                         ),
                                       ),
@@ -59,8 +61,7 @@ Widget build(BuildContext context) {
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(5),
-                                          color: Color.fromARGB(
-                                              227, 228, 234, 235),
+                                          color: AppColor.secondaryColor,
                                         ),
                                         //child: ,
                                       ),

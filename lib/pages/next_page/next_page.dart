@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task2/pages/pages.dart';
 import 'package:task2/bottom_navigation.dart';
+import 'package:task2/styles/styles.dart';
 import 'package:task2/common_widgets/common_widgets.dart';
 class NextPage extends StatefulWidget {
   const NextPage({super.key});
@@ -18,7 +19,7 @@ class _NextPageState extends State<NextPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 249, 247, 247),
+          backgroundColor:AppColor.primaryColor,
           title: Text(
             'janji',
             style: TextStyle(color: Colors.black),
@@ -34,9 +35,9 @@ class _NextPageState extends State<NextPage> {
             )
           ],
           bottom: TabBar(
-              indicatorColor: Color.fromARGB(255, 138, 104, 255),
+             indicatorColor:AppColor.teriteryColor,
               labelColor: Colors.black,
-              unselectedLabelColor: Color.fromARGB(211, 213, 218, 220),
+              unselectedLabelColor:TextColor.primaryColor,
               tabs: [
                 Tab(
                   text: 'Akan atang',
@@ -53,7 +54,7 @@ class _NextPageState extends State<NextPage> {
                 child: Container(
                   height: 400,
                   width: width,
-                  color: Color.fromARGB(255, 200, 200, 202),
+                  color: AppColor.secondaryColor,
                   child: ListView(
                       // mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
@@ -67,7 +68,7 @@ class _NextPageState extends State<NextPage> {
               )
             ]),
             Container( 
-              color: Color.fromARGB(255, 200, 200, 202),
+              color:AppColor.secondaryColor,
               child: ListView(
                   // mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[

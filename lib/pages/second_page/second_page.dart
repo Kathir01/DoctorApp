@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task2/pages/pages.dart';
 import 'package:task2/bottom_navigation.dart';
 import 'package:task2/common_widgets/common_widgets.dart';
-
+import 'package:task2/styles/styles.dart';
 class SecondPage extends StatefulWidget {
   const SecondPage({super.key});
 
@@ -147,62 +147,18 @@ class _SecondPageState extends State<SecondPage> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: <Widget>[
-              Container(
-                width: 150,
-               child:Center(child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                             Text('Buat Janji'),
-                              SizedBox(
-                                width:50,
-                               child:Image.asset( 'assets/9.jpg'),
-                              ),
-
-                    ])),
-                 margin: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(150, 107, 72, 250),
-                        ),
+              CommonRow(text:'Buat Janji',
+                        image:'assets/9.jpg',
+                        color:BoxColor.primaryColor,
               ),
-              Container(
-                width: 150,
-                child:Center(child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                             Text('Dokter'),
-                              SizedBox(
-                                width:50,
-                               child:Image.asset( 'assets/8.webp'),
-                              ),
-
-                    ])),
-                 margin: EdgeInsets.all(8),
-                 decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(253, 254, 128, 103),
-                        ),
-               
-              ),
-              Container(
-                width: 150,
-               
-                   child:Center(child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                             Text('hagshg'),
-                              SizedBox(
-                                width:50,
-                               child:Image.asset( 'assets/9.jpg'),
-                              ),
-
-                    ])),
-                 margin: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(190, 194, 136, 248),
-                        ),
-              
+             CommonRow(
+              text:'Dokter',
+              image:'assets/8.webp',
+              color:BoxColor.secondaryColor,
+             ),
+              CommonRow(text:'katrahuh',
+              image:'assets/9.jpg',
+              color:BoxColor.teriteryColor,
               ),
               // Container(
               //   width: 150,
