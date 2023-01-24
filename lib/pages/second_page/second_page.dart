@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:task2/pages/pages.dart';
-import 'package:task2/bottom_navigation.dart';
 import 'package:task2/common_widgets/common_widgets.dart';
 import 'package:task2/styles/styles.dart';
+import 'package:task2/models/doctor_detials/doctor_detials.dart';
+
 class SecondPage extends StatefulWidget {
   const SecondPage({super.key});
 
@@ -20,218 +20,189 @@ class _SecondPageState extends State<SecondPage> {
     'book',
     'welcom',
   ];
+  List<DoctorDetials> aboutDoctor = [
+    DoctorDetials(
+        image: 'assets/2.webp',
+        name: 'Dr.Sekala Sianta',
+        special: 'Dokter Umum',
+        loctaion: 'Klinik Medika Keluarga',
+        date: 'Senin, 9 Januri 2023',
+        time: '08.00'),
+    DoctorDetials(
+        image: 'assets/3.webp',
+        name: 'Dr.Randi Pratama Sianta',
+        special: 'Dokter Spesialis Sarai',
+        loctaion: 'Klinik Angkasa Indah',
+        time: '10.00',
+        date: 'Rabu, 18 Januri 2023'),
+    DoctorDetials(
+        image: 'assets/3.webp',
+        name: 'Dr.Randi Pratama Sianta',
+        special: 'Dokter Spesialis Sarai',
+        loctaion: 'Klinik Angkasa Indah',
+        time: '10.00',
+        date: 'Rabu, 18 Januri 2023'),
+    DoctorDetials(
+        image: 'assets/3.webp',
+        name: 'Dr.Randi Pratama Sianta',
+        special: 'Dokter Spesialis Sarai',
+        loctaion: 'Klinik Angkasa Indah',
+        time: '10.00',
+        date: 'Rabu, 18 Januri 2023'),
+    DoctorDetials(
+        image: 'assets/3.webp',
+        name: 'Dr.Randi Pratama Sianta',
+        special: 'Dokter Spesialis Sarai',
+        loctaion: 'Klinik Angkasa Indah',
+        time: '10.00',
+        date: 'Rabu, 18 Januri 2023')
+  ];
+  List<PilihLayanan> philihdetials = [
+    PilihLayanan(
+        color1: BoxColor.primaryColor,
+        title: 'Buat Janji',
+        image: 'assets/9.jpg'),
+    PilihLayanan(
+        color1: BoxColor.secondaryColor,
+        title: 'Dokter',
+        image: 'assets/8.webp'),
+    PilihLayanan(
+        color1: BoxColor.teriteryColor,
+        title: 'Buat Janji',
+        image: 'assets/9.jpg')
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child:SafeArea(
-        child: Expanded(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-             
-              Container(
+              SizedBox(
                 height: 100,
                 width: 300,
-                // color: Colors.amber,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 80,
-                      width: 70,
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage('assets/2.webp'),
-                      ),
+                    const CircleAvatar(
+                      radius: 40,
+                      backgroundImage: AssetImage('assets/2.webp'),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Selamat Pagi.'),
-                            Text(
-                              'Floyd Miles',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            )
-                          ]),
-                    )
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('Selamat Pagi.'),
+                          Text(
+                            'Floyd Miles',
+                            style: TitleFonts.primaryText,
+                          )
+                        ]),
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 45),
-                height: 80,
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      'Bagaimana',
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      'Kabarmu hari ini?',
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-              ),
-              // Container(
-              //   decoration: BoxDecoration(
-              //     // borderRadius: BorderRadius.circular(10),
-              //     color: Color.fromARGB(255, 197, 196, 194),
-              //   ),
-              //   margin: EdgeInsets.only(left: 25),
-              //   height: 40,
-              //   // width: 50,
-              //   child:
-              //  TextField(
-              
-              //     decoration: InputDecoration(
-              //       border: OutlineInputBorder(),
-              //       prefixIcon: Icon(Icons.search),
-              //       hintText: 'Enter a search term',
-              //     ),
-              //   //),
-              // ),
-               Autocomplete<String>(
-                    optionsBuilder: (TextEditingValue textEditingValue) {
-                      if (textEditingValue.text == '') {
-                    return const Iterable<String>.empty();
-                   }
-                    return _kOptions.where((String option) {
-                     return option.contains(textEditingValue.text.toLowerCase());
-                        });
-                        },
-                         onSelected: (String selection) {
-                           debugPrint('You just selected $selection');
-                           },
-                           fieldViewBuilder: (BuildContext context, TextEditingController textEditingController,
-        FocusNode focusNode,
-        VoidCallback onFieldSubmitted) {
-          return SizedBox(
-            width:350,
-            child:TextField(
-            decoration: InputDecoration(
-               border: OutlineInputBorder(), 
-                contentPadding: EdgeInsets.all(8),
-               prefixIcon: Icon(Icons.search),
-               hintText: 'Enter a search term',
-            ),
-            controller: textEditingController,
-            focusNode: focusNode,
-            onSubmitted: (String value) {
-            
-            },));},
-                        ),
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                     // height: 50,
-                      padding: EdgeInsets.only(left: 15),
-                      child: Text('Pilih Layanan'),
-                    ),
-                    Container(
-          height: 180,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              CommonRow(text:'Buat Janji',
-                        image:'assets/9.jpg',
-                        color:BoxColor.primaryColor,
-              ),
-             CommonRow(
-              text:'Dokter',
-              image:'assets/8.webp',
-              color:BoxColor.secondaryColor,
-             ),
-              CommonRow(text:'katrahuh',
-              image:'assets/9.jpg',
-              color:BoxColor.teriteryColor,
-              ),
-              // Container(
-              //   width: 150,
-                
-              //    margin: EdgeInsets.all(8),
-              //    decoration: BoxDecoration(
-              //             borderRadius: BorderRadius.circular(20),
-              //             color: Colors.blue,
-              //           ),
-              // ),
-            ],
-          ),),
-                  ],
-                ),
-              ),
-              Container(
-                height: 30,
 
-                width: 350,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'Bagaimana',
+                    style: TitleFonts.secondaryText,
+                  ),
+                  Text(
+                    'Kabarmu hari ini?',
+                    style: TitleFonts.teritaryText,
+                  )
+                ],
+              ),
+              //),
+              Autocomplete<String>(
+                optionsBuilder: (TextEditingValue textEditingValue) {
+                  if (textEditingValue.text == '') {
+                    return const Iterable<String>.empty();
+                  }
+                  return _kOptions.where((String option) {
+                    return option.contains(textEditingValue.text.toLowerCase());
+                  });
+                },
+                onSelected: (String selection) {
+                  debugPrint('You just selected $selection');
+                },
+                fieldViewBuilder: (BuildContext context,
+                    TextEditingController textEditingController,
+                    FocusNode focusNode,
+                    VoidCallback onFieldSubmitted) {
+                  return SizedBox(
+                      width: 350,
+                      child: TextField(
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.all(8),
+                          prefixIcon: Icon(Icons.search),
+                          hintText: 'Enter a search term',
+                        ),
+                        controller: textEditingController,
+                        focusNode: focusNode,
+                        onSubmitted: (String value) {},
+                      ));
+                },
+              ),
+
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 15),
+                    child: Text('Pilih Layanan'),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 4,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: philihdetials.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return CommonRow(
+                              image: philihdetials[index].image,
+                              text: philihdetials[index].title,
+                              color: philihdetials[index].color1);
+                        }),
+                  ),
+                ],
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text('Janji Hari Ini'), Text('Lihat Semua')],
+                  children: const [Text('Janji Hari Ini'), Text('Lihat Semua')],
                 ),
-                // color: Colors.pink,
               ),
               Container(
-                height: 500,
-                width: 400,
-                // color: Color.fromARGB(255, 200, 200, 202),
-                child: ListView(
-                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      CommonContainer(
-                          text: 'Dr.Sekala Sianta',
-                          text1: 'Dokter Umum',
-                          text2: 'Klinik Medika Keluarga',
-                          text3: 'Senin, 9 Januri 2023',
-                          text4: '08.00',
-                          image: 'assets/2.webp'),
-                      CommonContainer(
-                          text: 'Dr.Randi Pratama Sianta',
-                          text1: 'Dokter Spesialis Sarai',
-                          text2: 'Klinik Angkasa Indah',
-                          text3: 'Rabu, 18 Januri 2023',
-                          text4: '10.00',
-                          image: 'assets/3.webp'),
-                      CommonContainer(
-                          text: 'Dr.Aksara Euroia',
-                          text1: 'Dokter Anak',
-                          text2: 'Klinik Ari Mentari',
-                          text3: 'Rabu, 31 Januri 2023',
-                          text4: '13.00',
-                          image: 'assets/4.jpg'),
-                      CommonContainer(
-                          text: 'Dr.Sekala Sianta',
-                          text1: 'Dokter Umum',
-                          text2: 'Klinik Medika Keluarga',
-                          text3: 'Senin, 15 Januri 2023',
-                          text4: '14.00',
-                          image: 'assets/1.jpg'),
-                      CommonContainer(
-                          text: 'Dr.Sekala Sianta',
-                          text1: 'Dokter Umum',
-                          text2: 'Klinik Ari Keluarga',
-                          text3: 'Rabu, 22 Januri 2023',
-                          text4: '12.00',
-                          image: 'assets/2.webp'),
-                    ]),
+                height: MediaQuery.of(context).size.height,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: aboutDoctor.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return CommonContainer(
+                          text: aboutDoctor[index].name,
+                          text1: aboutDoctor[index].special,
+                          text2: aboutDoctor[index].loctaion,
+                          text3: aboutDoctor[index].date,
+                          text4: aboutDoctor[index].time,
+                          image: aboutDoctor[index].image);
+                    }),
               ),
             ],
           ),
         ),
-      ),),
+      ),
     );
   }
 }

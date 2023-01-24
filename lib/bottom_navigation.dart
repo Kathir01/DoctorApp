@@ -7,16 +7,16 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int myIndex = 0;
+  int myIndex = 2;
   List<Widget> PageList = const [
     SecondPage(),
     Text(
-      'Sorry no data in your like',
+      'Sorry no like in your account',
       style: TextStyle(fontSize: 30),
     ),
     NextPage(),
     Text(
-      'All setings are fine',
+      'All setings are updated automatically',
       style: TextStyle(fontSize: 40),
     )
   ];

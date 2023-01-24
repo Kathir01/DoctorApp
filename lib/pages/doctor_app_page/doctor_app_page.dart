@@ -7,12 +7,8 @@ class DoctorAppPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //double height = MediaQuery.of(context).size.height;
-    //double width = MediaQuery.of(context).size.height;
-    
     return Scaffold(
-      body: Container(
-        child: Stack(
+      body:  Stack(
           children: <Widget>[
             Image.asset(
               'assets/doc.jpg',
@@ -22,41 +18,32 @@ class DoctorAppPage extends StatelessWidget {
             Positioned(
               bottom: 0,
               child: Container(
-                height: 300,
+                height: MediaQuery.of(context).size.height/3,
                 width: MediaQuery.of(context).size.width,
-                // width: 400,
+                
                 decoration: BoxDecoration(
                   color:AppColor.primaryColor,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50)),
+                  borderRadius:BoxBorders.secondaryBoxBorder
                 ),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Container(
-                        child: Text(
+                        Text(
                           'atur janji dengan dokter baisa lebih mudah',
                           style: TextStyle(fontSize: 20),
                           textAlign: TextAlign.center,
                         ),
-                      ),
-                      Container(
-                        child: Text(
+                     
+                        Text(
                           'Dapatkan layanan untuk mengatur jadwal pemerikaas dengan mudah dan nyaman',
                           textAlign: TextAlign.center,
                          style:TextStyle(color:TextColor.primaryColor)
                         ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.blue,
-                        ),
-                        height: 50,
-                        width: 300,
-                        child: ElevatedButton(
+                   
+                        ElevatedButton(
+        
                           child: const Text('click'),
+                          style:ElevatedButton.styleFrom(minimumSize:Size(350,50),),
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -65,13 +52,13 @@ class DoctorAppPage extends StatelessWidget {
                             );
                           },
                         ),
-                      )
+                    
                     ]),
               ),
             ),
           ],
         ),
-      ),
+      
     );
   }
 }
