@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task2/pages/pages.dart';
 import 'package:task2/styles/styles.dart';
+
 class BottomNavigation extends StatefulWidget {
   @override
   State<BottomNavigation> createState() => _BottomNavigationState();
@@ -24,9 +25,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: PageList[myIndex],
-      ),
+      body: PageList[myIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: myIndex,
         onTap: (index) {
@@ -35,8 +34,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
           });
         },
         type: BottomNavigationBarType.fixed,
-        backgroundColor:AppColor.primaryColor,
-        selectedItemColor:AppColor.teriteryColor,
+        backgroundColor: AppColor.primaryColor,
+        selectedItemColor: AppColor.teriteryColor,
         unselectedItemColor: Colors.black,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

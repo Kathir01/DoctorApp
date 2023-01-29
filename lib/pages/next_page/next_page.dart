@@ -1,7 +1,11 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:task2/styles/styles.dart';
 import 'package:task2/common_widgets/common_widgets.dart';
-import 'package:task2/models/doctor_detials/doctor_detials.dart';
+import 'package:task2/models/doctor_details/doctor_details.dart';
+
+import '../../services/firebase_crud.dart';
 
 class NextPage extends StatefulWidget {
   const NextPage({super.key});
@@ -11,43 +15,29 @@ class NextPage extends StatefulWidget {
 }
 
 class _NextPageState extends State<NextPage> {
-  List<DoctorDetials> aboutDoctor = [
-    DoctorDetials(
-        image: 'assets/2.webp',
-        name: 'Dr.Sekala Sianta',
-        special: 'Dokter Umum',
-        loctaion: 'Klinik Medika Keluarga',
-        date: 'Senin, 9 Januri 2023',
-        time: '08.00'),
-    DoctorDetials(
-        image: 'assets/3.webp',
-        name: 'Dr.Randi Pratama Sianta',
-        special: 'Dokter Spesialis Sarai',
-        loctaion: 'Klinik Angkasa Indah',
-        time: '10.00',
-        date: 'Rabu, 18 Januri 2023'),
-    DoctorDetials(
-        image: 'assets/3.webp',
-        name: 'Dr.Randi Pratama Sianta',
-        special: 'Dokter Spesialis Sarai',
-        loctaion: 'Klinik Angkasa Indah',
-        time: '10.00',
-        date: 'Rabu, 18 Januri 2023'),
-    DoctorDetials(
-        image: 'assets/3.webp',
-        name: 'Dr.Randi Pratama Sianta',
-        special: 'Dokter Spesialis Sarai',
-        loctaion: 'Klinik Angkasa Indah',
-        time: '10.00',
-        date: 'Rabu, 18 Januri 2023'),
-    DoctorDetials(
-        image: 'assets/3.webp',
-        name: 'Dr.Randi Pratama Sianta',
-        special: 'Dokter Spesialis Sarai',
-        loctaion: 'Klinik Angkasa Indah',
-        time: '10.00',
-        date: 'Rabu, 18 Januri 2023')
-  ];
+  List<DoctorDetails> aboutDoctor = [];
+  Query ref = FirebaseDatabase.instance.ref().child('doctordetials');
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  getData() async {
+    Map<String, dynamic> data = await DataService().fetch();
+    data.forEach((key, value) {
+      aboutDoctor.add(DoctorDetails(
+          key: key,
+          image: 'assets/5.jpg',
+          name: value['name'],
+          special: value['special'],
+          loctaion: value['location'],
+          time: value['Time'],
+          date: value['Date']));
+    });
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,12 +80,14 @@ class _NextPageState extends State<NextPage> {
             Container(
               width: width,
               color: AppColor.secondaryColor,
-              child: ListView.builder(
+              child: FirebaseAnimatedList(
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                itemCount: aboutDoctor.length,
-                itemBuilder: (BuildContext context, int index) {
+                query: ref,
+                itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                    Animation<double> animation, int index) {
                   return CommonContainer(
+                      snapshotKey: aboutDoctor[index].key,
                       text: aboutDoctor[index].name,
                       text1: aboutDoctor[index].special,
                       text2: aboutDoctor[index].loctaion,
@@ -107,12 +99,14 @@ class _NextPageState extends State<NextPage> {
             ),
             Container(
               color: AppColor.secondaryColor,
-              child: ListView.builder(
+              child: FirebaseAnimatedList(
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                itemCount: aboutDoctor.length,
-                itemBuilder: (BuildContext context, int index) {
+                query: ref,
+                itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                    Animation<double> animation, int index) {
                   return CommonContainer(
+                      snapshotKey: aboutDoctor[index].key,
                       text: aboutDoctor[index].name,
                       text1: aboutDoctor[index].special,
                       text2: aboutDoctor[index].loctaion,
