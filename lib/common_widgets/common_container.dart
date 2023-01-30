@@ -1,5 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:task2/models/doctor_details/doctor_details.dart';
+import 'package:task2/pages/add_details_page/add_details_page.dart';
 import 'package:task2/styles/styles.dart';
 
 class CommonContainer extends StatefulWidget {
@@ -64,14 +66,23 @@ class _CommonContainerState extends State<CommonContainer> {
                     PopupMenuItem(
                       value: 'Delete',
                       child: Text('Delete'),
-                      onTap: () async {
+                      onTap: () {
                         _deletedata(widget.snapshotKey);
                       },
                     ),
                     PopupMenuItem(
                       value: 'Update',
                       child: Text('Update'),
-                      onTap: () {},
+                      onTap: () {
+                        Future.delayed(Duration(seconds: 1), () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddDetails(
+                                        updatekey: widget.snapshotKey,
+                                      )));
+                        });
+                      },
                     )
                   ],
                 ),

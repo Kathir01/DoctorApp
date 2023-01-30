@@ -43,25 +43,25 @@ class _SecondPageState extends State<SecondPage> {
   ];
   Query ref = FirebaseDatabase.instance.ref().child('doctordetials');
   @override
-  void initState() {
-    getData();
-    super.initState();
-  }
+  // void initState() {
+  //   getData();
+  //   super.initState();
+  // }
 
-  getData() async {
-    Map<String, dynamic> data = await DataService().fetch();
-    data.forEach((key, value) {
-      aboutDoctor.add(DoctorDetails(
-          key: key,
-          image: 'assets/2.webp',
-          name: value['name'],
-          special: value['special'],
-          loctaion: value['location'],
-          time: value['Time'],
-          date: value['Date']));
-    });
-    setState(() {});
-  }
+  // getData() async {
+  //   Map<String, dynamic> data = await DataService().fetch();
+  //   data.forEach((key, value) {
+  //     aboutDoctor.add(DoctorDetails(
+  //         key: key,
+  //         image: 'assets/2.webp',
+  //         name: value['name'],
+  //         special: value['special'],
+  //         loctaion: value['location'],
+  //         time: value['Time'],
+  //         date: value['Date']));
+  //   });
+  //   setState(() {});
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +181,9 @@ class _SecondPageState extends State<SecondPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => AddDetails()),
+                                    builder: (context) => AddDetails(
+                                          updatekey: "",
+                                        )),
                               );
                             },
                             icon: Icon(
@@ -202,14 +204,17 @@ class _SecondPageState extends State<SecondPage> {
                 query: ref,
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
+                  print(snapshot.value);
+                  Map value = snapshot.value as Map;
+                  print(value['Date']);
                   return CommonContainer(
-                      snapshotKey: aboutDoctor[index].key,
-                      text: aboutDoctor[index].name,
-                      text1: aboutDoctor[index].special,
-                      text2: aboutDoctor[index].loctaion,
-                      text3: aboutDoctor[index].date,
-                      text4: aboutDoctor[index].time,
-                      image: aboutDoctor[index].image);
+                      snapshotKey: snapshot.key!,
+                      text: value['name'],
+                      text1: value['special'],
+                      text2: value['location'],
+                      text3: value['Date'],
+                      text4: value['Time'],
+                      image: 'assets/2.webp');
                 },
               ),
             ],

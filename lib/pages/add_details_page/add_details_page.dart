@@ -6,7 +6,8 @@ import 'package:task2/pages/add_details_page/add_details_page_components/add_det
 import '../../bottom_navigation.dart';
 
 class AddDetails extends StatefulWidget {
-  const AddDetails({Key? key}) : super(key: key);
+  const AddDetails({required this.updatekey});
+  final String updatekey;
 
   @override
   State<AddDetails> createState() => _AddDetailsState();
@@ -24,6 +25,20 @@ class _AddDetailsState extends State<AddDetails> {
   void initState() {
     super.initState();
     dref = FirebaseDatabase.instance.ref().child('doctordetials');
+    if (widget.updatekey != "") {
+      print('inside update');
+      dref.child(widget.updatekey).once().then((value) {
+        print(value);
+        DataSnapshot event = value.snapshot;
+        Map doctors = event.value as Map;
+        print(doctors);
+        userNameController.text = doctors['name'];
+        userSpecialController.text = doctors['special'];
+        userLocationController.text = doctors['location'];
+        userDateController.text = doctors['Date'];
+        userTimeController.text = doctors['Time'];
+      });
+    }
   }
 
   @override
@@ -86,18 +101,36 @@ class _AddDetailsState extends State<AddDetails> {
             ),
             OutlinedButton(
                 onPressed: (() {
-                  Map<String, String> students = {
-                    'name': userNameController.text,
-                    'special': userSpecialController.text,
-                    'location': userLocationController.text,
-                    'Date': userDateController.text,
-                    'Time': userTimeController.text
-                  };
-                  dref.push().set(students);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => BottomNavigation()),
-                  );
+                  if (widget.updatekey == "") {
+                    Map<String, String> doctors = {
+                      'name': userNameController.text,
+                      'special': userSpecialController.text,
+                      'location': userLocationController.text,
+                      'Date': userDateController.text,
+                      'Time': userTimeController.text
+                    };
+                    dref.push().set(doctors);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BottomNavigation()),
+                    );
+                  } else {
+                    Map<String, String> doctors = {
+                      'name': userNameController.text,
+                      'special': userSpecialController.text,
+                      'location': userLocationController.text,
+                      'Date': userDateController.text,
+                      'Time': userTimeController.text
+                    };
+
+                    dref.child(widget.updatekey).update(doctors);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BottomNavigation()),
+                    );
+                  }
                 }),
                 child: Text('Submit')),
           ]),
